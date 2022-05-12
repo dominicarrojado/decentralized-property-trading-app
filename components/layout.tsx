@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import StoreContext from '../lib/context';
-import { EthAccount } from '../lib/types';
+import { EthAccount, Listing } from '../lib/types';
 import Header from './header';
 import MetaTags from './metaTags';
 
@@ -11,12 +11,18 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   const [account, setAccount] = useState<EthAccount | null>(null);
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [hasListings, setHasListings] = useState(false);
 
   return (
     <StoreContext.Provider
       value={{
         account,
+        listings,
+        hasListings,
         setAccount,
+        setListings,
+        setHasListings,
       }}
     >
       <MetaTags />

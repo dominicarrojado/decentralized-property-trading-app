@@ -19,6 +19,9 @@ export default function Header() {
             <Link href={Routes.PROPERTIES} passHref>
               <Nav.Link>Properties</Nav.Link>
             </Link>
+            <Link href={Routes.PROPERTY_CREATE} passHref>
+              <Nav.Link>Create Property</Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
