@@ -29,7 +29,7 @@ export default function TransferShares() {
       console.log(context.account?.addressId);
 
       const res = await contract.methods
-        .transfer(addressId, transferSupply, listingId)
+        .transferToken(addressId, transferSupply, listingId)
         .send();
 
       setListingId('');
