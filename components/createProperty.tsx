@@ -21,7 +21,9 @@ export default function CreateProperty() {
         from: context.account?.addressId,
         gas: CONTRACT_CREATE_PROP_GAS,
       });
-      const res = await contract.methods.createProperty(1, 1, '1', 1000).send();
+      const res = await contract.methods
+        .createProperty(propertyPrice, listingId, pinCode, propertyPrice)
+        .send();
 
       setMessage(JSON.stringify(res));
       setFetchState(FetchState.SUCCESS);
