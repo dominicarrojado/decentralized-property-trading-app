@@ -145,16 +145,9 @@ export const CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: 'decimal',
-    outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
-    stateMutability: 'pure',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'decimals',
     outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
-    stateMutability: 'view',
+    stateMutability: 'pure',
     type: 'function',
   },
   {
@@ -299,5 +292,5 @@ export const CONTRACT_ABI = [
     type: 'function',
   },
 ];
-export const CONTRACT_ADDRESS = '0x7a8Fc944Cbaf4A8357356bA1bded0b9652b690d2';
+export const CONTRACT_ADDRESS = '0xF9da791197C13a471B266cFde7ae3C7CB31f13Fa';
 export const CONTRACT_CREATE_PROP_GAS = 15000000;
