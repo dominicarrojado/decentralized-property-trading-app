@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert, Button } from 'react-bootstrap';
-import { useCurrentAddressId } from '../lib/custom-hooks';
+import StoreContext from '../lib/context';
 import { Routes } from '../lib/types';
 
 export default function Welcome() {
-  const addressId = useCurrentAddressId();
+  const { account } = useContext(StoreContext);
 
   return (
     <div>
@@ -13,7 +13,7 @@ export default function Welcome() {
         <Alert.Heading>Welcome!</Alert.Heading>
         <p>Please can now browse and buy properties in our marketplace.</p>
         <p>
-          Your Address is: <b>{addressId}</b>
+          Your address is: <b>{account?.addressId}</b>
         </p>
         <hr />
         <div className="d-flex justify-content-end">

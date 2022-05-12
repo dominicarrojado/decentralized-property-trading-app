@@ -15,3 +15,7 @@ export enum ConnectState {
   CONNECTED = 'CONNECTED',
   ERROR = 'ERROR',
 }
+
+export type EthAccount = {
+  addressId: string;
+};

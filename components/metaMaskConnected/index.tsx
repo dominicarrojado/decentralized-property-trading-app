@@ -1,7 +1,8 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { getCurrentAddressId } from '../../lib/eth';
 import { useMounted } from '../../lib/custom-hooks';
 import { ConnectState } from '../../lib/types';
+import StoreContext from '../../lib/context';
 import Connect from './connect';
 import Error from './error';
 import Install from './install';
@@ -11,10 +12,10 @@ type Props = {
 };
 
 export default function MetaMaskConnected({ children }: Props) {
+  const context = useContext(StoreContext);
   const [connectState, setConnectState] = useState(ConnectState.DEFAULT);
   const isMounted = useMounted();
   const [isInstalled, setIsInstalled] = useState(false);
-  const [_addressId, setAddressId] = useState('');
   const connectToAccount = async () => {
     setConnectState(ConnectState.CONNECTING);
 
@@ -24,7 +25,9 @@ export default function MetaMaskConnected({ children }: Props) {
       if (!newAddressId) {
         setConnectState(ConnectState.ERROR);
       } else {
-        setAddressId(newAddressId);
+        context.setAccount({
+          addressId: newAddressId,
+        });
         setConnectState(ConnectState.CONNECTED);
       }
     } catch (error) {
@@ -42,7 +45,11 @@ export default function MetaMaskConnected({ children }: Props) {
     };
 
     checkMetaMaskInstalled();
-  }, []);
+
+    if (context.account) {
+      setConnectState(ConnectState.CONNECTED);
+    }
+  }, [context.account]);
 
   if (!isMounted) {
     return null;
