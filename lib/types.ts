@@ -16,6 +16,13 @@ export enum ConnectState {
   ERROR = 'ERROR',
 }
 
+export enum FetchState {
+  DEFAULT = 'DEFAULT',
+  LOADING = 'LOADING',
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR',
+}
+
 export type EthAccount = {
   addressId: string;
 };
