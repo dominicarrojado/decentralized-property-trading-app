@@ -8,12 +8,12 @@ type Props = {
 export default function Error({ buttonOnClick }: Props) {
   return (
     <div>
-      <Alert variant="error">
+      <Alert variant="danger">
         <Alert.Heading>Unexpected Error</Alert.Heading>
         <p>Something went wrong. Please try again...</p>
         <hr />
         <div className="d-flex justify-content-end">
-          <Button variant="error" onClick={buttonOnClick}>
+          <Button variant="danger" onClick={buttonOnClick}>
             Retry Again
           </Button>
         </div>

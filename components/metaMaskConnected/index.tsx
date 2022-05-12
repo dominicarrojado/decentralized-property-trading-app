@@ -38,11 +38,7 @@ export default function MetaMaskConnected({ children }: Props) {
       const { ethereum } = window;
       const isMetaMaskInstalled = Boolean(ethereum && ethereum.isMetaMask);
 
-      setIsInstalled(Boolean(isMetaMaskInstalled));
-
-      if (isMetaMaskInstalled) {
-        connectToAccount();
-      }
+      setIsInstalled(isMetaMaskInstalled);
     };
 
     checkMetaMaskInstalled();
