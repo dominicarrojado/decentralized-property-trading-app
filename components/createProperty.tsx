@@ -23,7 +23,7 @@ export default function CreateProperty() {
         gas: CONTRACT_CREATE_PROP_GAS,
       });
       const res = await contract.methods
-        .createProperty(propertyPrice, listingId, pinCode, propertyPrice)
+        .createProperty(propertyPrice, listingId, pinCode, tokenSupply)
         .send();
 
       setMessage(JSON.stringify(res));
