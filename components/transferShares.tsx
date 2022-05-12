@@ -9,17 +9,25 @@ export default function TransferShares() {
   const context = useContext(StoreContext);
   const [fetchState, setFetchState] = useState(FetchState.DEFAULT);
   const [message, setMessage] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [listingId, setListingId] = useState('');
   const [addressId, setAddressId] = useState('');
   const [transferSupply, setTransferSupply] = useState(0);
   const getMessage = async () => {
     try {
       setFetchState(FetchState.LOADING);
+      setMessage('');
+      setErrorMsg('');
 
       const contract = await getContract({
         from: context.account?.addressId,
         gas: CONTRACT_CREATE_PROP_GAS,
       });
+
+      // console.log(await contract.methods.propSupplier.call().call());
+      console.log(await contract.methods.propSupplier(1).call());
+      console.log(context.account?.addressId);
+
       const res = await contract.methods
         .transfer(addressId, transferSupply, listingId)
         .send();
@@ -29,9 +37,10 @@ export default function TransferShares() {
       setTransferSupply(0);
       setMessage(JSON.stringify(res));
       setFetchState(FetchState.SUCCESS);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setFetchState(FetchState.ERROR);
+      setErrorMsg(err.message);
     }
   };
   const buttonText = useMemo(() => {
@@ -85,6 +94,12 @@ export default function TransferShares() {
         </p>
       )}
       <hr />
+      {fetchState === FetchState.ERROR && (
+        <>
+          <p className="text-danger">Oops! Something went wrong...</p>
+          <p className="text-danger text-break">{errorMsg}</p>
+        </>
+      )}
       <div className="d-flex justify-content-end">
         <Button
           variant="secondary"

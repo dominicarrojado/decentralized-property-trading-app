@@ -9,6 +9,7 @@ export default function CreateProperty() {
   const context = useContext(StoreContext);
   const [fetchState, setFetchState] = useState(FetchState.DEFAULT);
   const [message, setMessage] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const [propertyPrice, setPropertyPrice] = useState(1);
   const [listingId, setListingId] = useState('1');
   const [pinCode, setPinCode] = useState('1');
@@ -27,9 +28,10 @@ export default function CreateProperty() {
 
       setMessage(JSON.stringify(res));
       setFetchState(FetchState.SUCCESS);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setFetchState(FetchState.ERROR);
+      setErrorMsg(err.message);
     }
   };
   const buttonText = useMemo(() => {
@@ -89,6 +91,12 @@ export default function CreateProperty() {
         </p>
       )}
       <hr />
+      {fetchState === FetchState.ERROR && (
+        <>
+          <p className="text-danger">Oops! Something went wrong...</p>
+          <p className="text-danger">{errorMsg}</p>
+        </>
+      )}
       <div className="d-flex justify-content-end">
         <Button
           variant="secondary"

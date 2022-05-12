@@ -12,5 +12,6 @@ export async function getCurrentAddressId() {
 export async function getContract(options?: any) {
   const Web3 = await getWeb3();
   const web3 = new Web3(window.ethereum);
+
   return new web3.eth.Contract(CONTRACT_ABI as [], CONTRACT_ADDRESS, options);
 }
