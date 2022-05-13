@@ -49,7 +49,7 @@ export default function PropertyShares() {
   }, []);
 
   return (
-    <Alert variant="secondary">
+    <Alert variant="primary" className="sticky-top">
       <Alert.Heading>Property Shares</Alert.Heading>
       <p className="text-break">
         Balance: <b>{hasBalance ? balance : '----'}</b>
