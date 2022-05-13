@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Alert, Badge, Spinner } from 'react-bootstrap';
 import { getContract } from '../../lib/eth';
 import MetaMaskConnected from '../../components/metaMaskConnected';
-import { CONTRACT_CREATE_PROP_GAS } from '../../lib/constants';
+import { CONTRACT_CREATE_PROP_GAS, DEMO_LISTING_ID } from '../../lib/constants';
 import { FetchState } from '../../lib/types';
 import { useCurrentAddressId } from '../../lib/custom-hooks';
 
@@ -27,7 +27,7 @@ export default function CreateProperty() {
         gas: CONTRACT_CREATE_PROP_GAS,
       });
       const res = await contract.methods
-        .createProperty(10000000, 23451242, '550321', 10)
+        .createProperty(10000000, DEMO_LISTING_ID, '550321', 10)
         .send();
 
       setMessage({

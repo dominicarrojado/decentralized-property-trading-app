@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { Alert, Button, Form, FormGroup, FormLabel } from 'react-bootstrap';
-import { CONTRACT_CREATE_PROP_GAS } from '../lib/constants';
+import { Alert, Button, Form } from 'react-bootstrap';
+import { CONTRACT_CREATE_PROP_GAS, DEMO_LISTING_ID } from '../lib/constants';
 import StoreContext from '../lib/context';
 import { getContract } from '../lib/eth';
 import { FetchState } from '../lib/types';
@@ -10,7 +10,7 @@ export default function TransferShares() {
   const [fetchState, setFetchState] = useState(FetchState.DEFAULT);
   const [message, setMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [listingId, setListingId] = useState('550321');
+  const [listingId, setListingId] = useState(DEMO_LISTING_ID);
   const [addressId, setAddressId] = useState('');
   const [transferSupply, setTransferSupply] = useState(0);
   const getMessage = async () => {
@@ -28,7 +28,7 @@ export default function TransferShares() {
         .transferToken(addressId, transferSupply, listingId)
         .send();
 
-      setListingId('');
+      setListingId(0);
       setAddressId('');
       setTransferSupply(0);
       setMessage(JSON.stringify(res));
@@ -78,9 +78,9 @@ export default function TransferShares() {
         <Form.Group className="mb-3" controlId="addressId">
           <Form.Label>Listing ID:</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             value={listingId}
-            onChange={(e) => setListingId(e.target.value)}
+            onChange={(e) => setListingId(Number(e.target.value))}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="addressId">

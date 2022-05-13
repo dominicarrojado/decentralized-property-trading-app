@@ -11,7 +11,7 @@ export default function CreateProperty() {
   const [message, setMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [propertyPrice, setPropertyPrice] = useState(1);
-  const [listingId, setListingId] = useState('1');
+  const [listingId, setListingId] = useState(1);
   const [pinCode, setPinCode] = useState('1');
   const [tokenSupply, setTokenSupply] = useState(0);
   const getMessage = async () => {
@@ -63,9 +63,9 @@ export default function CreateProperty() {
         <Form.Group className="mb-3" controlId="addressId">
           <Form.Label>Listing ID:</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             value={listingId}
-            onChange={(e) => setListingId(e.target.value)}
+            onChange={(e) => setListingId(Number(e.target.value))}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
