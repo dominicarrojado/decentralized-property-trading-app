@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import StoreContext from '../lib/context';
 import { getContract } from '../lib/eth';
 import { FetchState } from '../lib/types';
@@ -41,6 +41,19 @@ export default function PropertyShares() {
       .on('data', getMessage);
   };
 
+  const buttonText = useMemo(() => {
+    switch (fetchState) {
+      case FetchState.LOADING:
+        return 'Waiting...';
+
+      case FetchState.ERROR:
+        return 'Try Again';
+
+      default:
+        return 'Refresh Balance';
+    }
+  }, [fetchState]);
+
   useEffect(() => {
     getMessage();
     subscribeToEvents();
@@ -54,12 +67,22 @@ export default function PropertyShares() {
       <p className="text-break">
         Balance: <b>{hasBalance ? balance : '----'}</b>
       </p>
+      <hr />
       {fetchState === FetchState.ERROR && (
         <>
           <p className="text-danger">Oops! Something went wrong...</p>
           <p className="text-danger">{errorMsg}</p>
         </>
       )}
+      <div className="d-flex justify-content-end">
+        <Button
+          variant="primary"
+          onClick={getMessage}
+          disabled={fetchState === FetchState.LOADING}
+        >
+          {buttonText}
+        </Button>
+      </div>
     </Alert>
   );
 }
