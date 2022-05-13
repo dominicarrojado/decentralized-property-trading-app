@@ -1,4 +1,5 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { getCurrentAddressId } from '../../lib/eth';
 import { useMounted } from '../../lib/custom-hooks';
 import { ConnectState } from '../../lib/types';
@@ -12,6 +13,9 @@ type Props = {
 };
 
 export default function MetaMaskConnected({ children }: Props) {
+  const autoCompleteDoneRef = useRef(false);
+  const router = useRouter();
+  const { autoComplete } = router.query;
   const context = useContext(StoreContext);
   const [connectState, setConnectState] = useState(ConnectState.DEFAULT);
   const isMounted = useMounted();
@@ -50,6 +54,17 @@ export default function MetaMaskConnected({ children }: Props) {
       setConnectState(ConnectState.CONNECTED);
     }
   }, [context.account]);
+
+  useEffect(() => {
+    const autoCompleteDone = autoCompleteDoneRef.current;
+
+    if (!autoCompleteDone && !context.account) {
+      autoCompleteDoneRef.current = true;
+      connectToAccount();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoComplete, context.account]);
 
   if (!isMounted) {
     return null;

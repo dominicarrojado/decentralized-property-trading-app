@@ -1,26 +1,31 @@
-import React, { useContext, useMemo, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { Button, Alert, Badge, Spinner } from 'react-bootstrap';
 import { getContract } from '../../lib/eth';
 import MetaMaskConnected from '../../components/metaMaskConnected';
 import StoreContext from '../../lib/context';
 import { CONTRACT_CREATE_PROP_GAS } from '../../lib/constants';
 import { FetchState } from '../../lib/types';
-import { Alert, Badge } from 'react-bootstrap';
+import { useCurrentAddressId } from '../../lib/custom-hooks';
 
 export default function CreateProperty() {
+  const autoCompleteDoneRef = useRef(false);
+  const router = useRouter();
+  const { autoComplete } = router.query;
+  const context = useContext(StoreContext);
+  const currentAddressId = useCurrentAddressId();
   const [fetchState, setFetchState] = useState(FetchState.DEFAULT);
   const [message, setMessage] = useState({
     destinationAcc: null,
     tokensCount: null,
   });
-  const context = useContext(StoreContext);
 
   const tokenizeProperty = async () => {
     try {
       setFetchState(FetchState.LOADING);
 
       const contract = await getContract({
-        from: context.account?.addressId,
+        from: currentAddressId,
         gas: CONTRACT_CREATE_PROP_GAS,
       });
       const res = await contract.methods
@@ -81,11 +86,26 @@ export default function CreateProperty() {
 
     console.log('divi', divRes);
   };
+
+  useEffect(() => {
+    const autoCompleteDone = autoCompleteDoneRef.current;
+
+    if (!autoCompleteDone && autoComplete === '1' && currentAddressId) {
+      autoCompleteDoneRef.current = true;
+      tokenizeProperty();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoComplete, currentAddressId]);
+
   return (
     <MetaMaskConnected>
       <div>
         <Button variant={buttonVariant} onClick={tokenizeProperty}>
-          {buttonText}
+          {buttonText}{' '}
+          {fetchState === FetchState.LOADING && (
+            <Spinner animation="border" variant="dark" size="sm" />
+          )}
         </Button>
       </div>
       <br />
