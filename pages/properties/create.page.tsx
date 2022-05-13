@@ -52,7 +52,7 @@ export default function CreateProperty() {
         return 'Try Again';
 
       default:
-        return 'Confirm Token Genration';
+        return 'Confirm Token Generation';
     }
   }, [fetchState]);
 

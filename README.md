@@ -2,7 +2,7 @@
 
 ![CI/CD](https://github.com/dominicarrojado/decentralized-property-trading-app/workflows/CI/CD/badge.svg)
 
-Built with [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/).
+A decentralized property trading app built with [Next.js](https://nextjs.org/) + [TypeScript](https://www.typescriptlang.org/) for #GuruHackathon2022 organized by [PropertyGuru](https://github.com/propertyguru).
 
 ## Quick Start
 

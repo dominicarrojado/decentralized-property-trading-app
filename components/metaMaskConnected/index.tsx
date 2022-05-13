@@ -58,7 +58,7 @@ export default function MetaMaskConnected({ children }: Props) {
   useEffect(() => {
     const autoCompleteDone = autoCompleteDoneRef.current;
 
-    if (!autoCompleteDone && !context.account) {
+    if (!autoCompleteDone && autoComplete === '1' && !context.account) {
       autoCompleteDoneRef.current = true;
       connectToAccount();
     }

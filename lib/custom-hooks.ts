@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import StoreContext from './context';
-import { getCurrentAddressId } from './eth';
 import { getFaker } from './imports';
 import { FetchState, Listing } from './types';
 
@@ -15,18 +14,9 @@ export function useMounted() {
 }
 
 export function useCurrentAddressId() {
-  const [addressId, setAddressId] = useState('');
+  const context = useContext(StoreContext);
 
-  useEffect(() => {
-    const updateAddressId = async () => {
-      const newAddressId = await getCurrentAddressId();
-      setAddressId(newAddressId);
-    };
-
-    updateAddressId();
-  }, []);
-
-  return addressId;
+  return context.account?.addressId;
 }
 
 export function useGetListings() {

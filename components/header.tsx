@@ -14,7 +14,7 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link href={Routes.HOME} passHref>
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link>Dashboard</Nav.Link>
             </Link>
             <Link href={Routes.PROPERTIES} passHref>
               <Nav.Link>Properties</Nav.Link>

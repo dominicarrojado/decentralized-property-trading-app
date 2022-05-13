@@ -24,10 +24,6 @@ export default function TransferShares() {
         gas: CONTRACT_CREATE_PROP_GAS,
       });
 
-      // console.log(await contract.methods.propSupplier.call().call());
-      console.log(await contract.methods.propSupplier(1).call());
-      console.log(context.account?.addressId);
-
       const res = await contract.methods
         .transferToken(addressId, transferSupply, listingId)
         .send();
@@ -62,6 +58,22 @@ export default function TransferShares() {
       <p>
         Transfer your shares from your existing properties to another owner.
       </p>
+      <p>
+        <ul>
+          <li>
+            Arijit's wallet address -{' '}
+            <b>0x6F529b138Eb5d99ff8b2691BCBF0129a5dAe7679</b>
+          </li>
+          <li>
+            Ketan's wallet address -{' '}
+            <b>0xe31058855f1b75f52498d4004C6fb3d3D4F06C5A</b>
+          </li>
+          <li>
+            Sud's wallet address -{' '}
+            <b>0xe20517bdef7b9dE86225dA8ACd981fa992974729</b>
+          </li>
+        </ul>
+      </p>
       <Form>
         <Form.Group className="mb-3" controlId="addressId">
           <Form.Label>Listing ID:</Form.Label>
@@ -80,7 +92,7 @@ export default function TransferShares() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Transfer amount:</Form.Label>
+          <Form.Label>Transfer amount / Quantity of shares:</Form.Label>
           <Form.Control
             type="number"
             value={transferSupply}
