@@ -10,7 +10,7 @@ export default function TransferShares() {
   const [fetchState, setFetchState] = useState(FetchState.DEFAULT);
   const [message, setMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [listingId, setListingId] = useState('');
+  const [listingId, setListingId] = useState('550321');
   const [addressId, setAddressId] = useState('');
   const [transferSupply, setTransferSupply] = useState(0);
   const getMessage = async () => {
