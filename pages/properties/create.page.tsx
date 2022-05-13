@@ -64,6 +64,23 @@ export default function CreateProperty() {
     }
   }, [fetchState]);
 
+  const dividentCheck = async () => {
+    const contract = await getContract({
+      from: context.account?.addressId,
+      gas: CONTRACT_CREATE_PROP_GAS,
+    });
+    const res = await contract.methods
+      .createProperty(10000000, 23451243, '550321', 10)
+      .send();
+
+    console.log('create property', res);
+
+    const divRes = await contract.methods
+      .releaseDividend()
+      .send({ value: 500000000, gas: 50000 });
+
+    console.log('divi', divRes);
+  };
   return (
     <MetaMaskConnected>
       <div>
@@ -88,6 +105,11 @@ export default function CreateProperty() {
           </Alert>
         </div>
       )}
+      <div>
+        <Button variant="secondary" onClick={dividentCheck}>
+          Release Divident
+        </Button>
+      </div>
     </MetaMaskConnected>
   );
 }
