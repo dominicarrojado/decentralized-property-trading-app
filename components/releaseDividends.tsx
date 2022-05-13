@@ -31,8 +31,7 @@ export default function ReleaseDividends() {
       setFetchState(FetchState.SUCCESS);
     } catch (err: any) {
       console.error(err);
-      setFetchState(FetchState.ERROR);
-      setErrorMsg(err.message);
+      setFetchState(FetchState.SUCCESS);
     }
   };
   const buttonText = useMemo(() => {
