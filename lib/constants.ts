@@ -565,5 +565,5 @@ export const CONTRACT_ABI = [
     type: 'function',
   },
 ];
-export const CONTRACT_ADDRESS = '0x0Da071B5dAAAa0e5bcb1Ccd94B0895ba871DE3eb';
+export const CONTRACT_ADDRESS = '0x91894156731284BE9d8E887b1161ac20502C72E3';
 export const CONTRACT_CREATE_PROP_GAS = 15000000;
